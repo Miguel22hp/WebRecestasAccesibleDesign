@@ -9,6 +9,10 @@
   --highlight-text: #fbbf24; /* Color del texto cuando está resaltado */
 }
 
+html, body {
+  height: 100%;
+}
+
 * { box-sizing: border-box; }
 body {
   margin: 0;

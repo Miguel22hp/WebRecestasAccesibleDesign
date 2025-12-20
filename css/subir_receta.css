@@ -7,6 +7,10 @@
   --border: #1f2937;
 }
 
+html, body {
+  height: 100%;
+}
+
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; }
 .page { max-width: 800px; margin: 0 auto; padding: 48px 20px; }
