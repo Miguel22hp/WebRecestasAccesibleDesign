@@ -32,26 +32,42 @@
 
       const html = htm.bind(React.createElement);
 
+      // Mapeo de nombres de recetas a IDs
+      const recipeMapping = {
+        "Tacos rápidos": "tacos",
+        "Ensalada de quinoa": "ensalada", 
+        "Bowl Vegano": "vegana",
+        "Salmón al horno": "salmon"
+      };
+
       const categories = [
         {
           name: "Recetas Rápidas",
-          recipes: ["Tacos rápidos", "Wrap de hummus"]
+          recipes: ["Tacos rápidos"]
         },
         {
           name: "Recetas Veganas",
-          recipes: ["Ensalada de quinoa", "Curry de garbanzos"]
+          recipes: ["Ensalada de quinoa", "Bowl Vegano"]
         },
         {
           name: "Recetas Pescado",
-          recipes: ["Salmón al horno", "Poke de atún"]
+          recipes: ["Salmón al horno"]
         },
         {
           name: "Recetas Horno",
-          recipes: ["Lasaña de verduras", "Verduras asadas"]
+          recipes: ["Salmón al horno"]
         }
       ];
 
       function App() {
+
+        const handleRecipeClick = (recipeName) => {
+          const recipeId = recipeMapping[recipeName];
+          if (recipeId) {
+            window.location.href = `./Receta.html?id=${recipeId}`;
+          }
+        };
+
         return html`
           <section className="page">
             <h1>Categorias</h1>
@@ -65,7 +81,22 @@
                   </h3>
                   <${AccordionPanel} className="accordion__panel">
                     <ul className="list">
-                      ${cat.recipes.map((item) => html`<li key=${item}>• ${item}</li>`)}
+                      ${cat.recipes.map((item) => html`
+                        <li key=${item}>
+                          <button 
+                            className="recipe-link"
+                            onClick=${() => handleRecipeClick(item)}
+                            onKeyDown=${(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handleRecipeClick(item);
+                              }
+                            }}
+                          >
+                            ${item}
+                          </button>
+                        </li>
+                      `)}
                     </ul>
                   <//>
                 <//>
