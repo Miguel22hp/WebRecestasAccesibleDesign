@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categorias</title>
+    <link rel="stylesheet" href="https://unpkg.com/@reach/accordion@0.18.0/styles.css" />
+    <link rel="stylesheet" href="./css/categorias.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "htm": "https://esm.sh/htm@3.1.1"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import htm from "htm";
+      import {
+        Accordion,
+        AccordionItem,
+        AccordionButton,
+        AccordionPanel
+      } from "https://esm.sh/@reach/accordion@0.18.0?external=react,react-dom";
+
+      const html = htm.bind(React.createElement);
+
+      const categories = [
+        {
+          name: "Recetas Rápidas",
+          recipes: ["Tacos rápidos", "Wrap de hummus"]
+        },
+        {
+          name: "Recetas Veganas",
+          recipes: ["Ensalada de quinoa", "Curry de garbanzos"]
+        },
+        {
+          name: "Recetas Pescado",
+          recipes: ["Salmón al horno", "Poke de atún"]
+        },
+        {
+          name: "Recetas Horno",
+          recipes: ["Lasaña de verduras", "Verduras asadas"]
+        }
+      ];
+
+      function App() {
+        return html`
+          <section className="page">
+            <h1>Categorias</h1>
+            <p className="muted">Despliega el acordeón para ver ideas.</p>
+
+            <${Accordion} collapsible>
+              ${categories.map((cat, index) => html`
+                <${AccordionItem} key=${cat.name} index=${index}>
+                  <h3>
+                    <${AccordionButton} className="accordion__button">${cat.name}<//>
+                  </h3>
+                  <${AccordionPanel} className="accordion__panel">
+                    <ul className="list">
+                      ${cat.recipes.map((item) => html`<li key=${item}>• ${item}</li>`)}
+                    </ul>
+                  <//>
+                <//>
+              `)}
+            <//>
+
+            <a className="link" href="./Index.html">Volver a inicio</a>
+          </section>
+        `;
+      }
+
+      const root = document.getElementById("root");
+      if (!root) {
+        throw new Error("No se encontró el contenedor root");
+      }
+
+      createRoot(root).render(html`<${App} />`);
+    </script>
+  </body>
+</html>

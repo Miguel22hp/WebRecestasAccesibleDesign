@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receta</title>
+    <link rel="stylesheet" href="https://unpkg.com/@reach/tabs@0.18.0/styles.css" />
+    <link rel="stylesheet" href="./css/receta.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "htm": "https://esm.sh/htm@3.1.1"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import htm from "htm";
+      import { Tabs, TabList, Tab, TabPanels, TabPanel } from "https://esm.sh/@reach/tabs@0.18.0?external=react,react-dom";
+
+      const html = htm.bind(React.createElement);
+
+      const recipe = {
+        name: "Tacos rápidos de pollo",
+        time: "15 min",
+        difficulty: "fácil",
+        ingredients: ["Tortillas", "Pollo desmenuzado", "Pico de gallo", "Cilantro"],
+        steps: [
+          "Calienta las tortillas.",
+          "Saltea el pollo con especias.",
+          "Monta los tacos con pico de gallo y cilantro.",
+          "Exprime lima al final."
+        ],
+        images: [
+          "https://images.unsplash.com/photo-1608032077018-1e1d9c0e849f?auto=format&fit=crop&w=900&q=80"
+        ]
+      };
+
+      function App() {
+        return html`
+          <section className="page">
+            <header className="page__header">
+              <h1>Receta</h1>
+              <p className="muted">${recipe.time} · Dificultad ${recipe.difficulty}</p>
+              <a className="link" href="./Index.html">Volver a inicio</a>
+            </header>
+
+            <h2>${recipe.name}</h2>
+
+            <${Tabs}>
+              <${TabList} aria-label="Secciones de la receta">
+                <${Tab}>Ingredientes<//>
+                <${Tab}>Pasos<//>
+                <${Tab}>Imágenes<//>
+              <//>
+              <${TabPanels}>
+                <${TabPanel}>
+                  <ul className="pill-list">
+                    ${recipe.ingredients.map((item) => html`<li key=${item} className="pill">${item}</li>`) }
+                  </ul>
+                <//>
+                <${TabPanel}>
+                  <ol className="step-list">
+                    ${recipe.steps.map((step) => html`<li key=${step}>${step}</li>`) }
+                  </ol>
+                <//>
+                <${TabPanel}>
+                  <div className="gallery">
+                    ${recipe.images.map((src) => html`
+                      <figure key=${src} className="gallery__item">
+                        <img src=${src} alt=${`Foto de ${recipe.name}`} loading="lazy" />
+                      </figure>
+                    `)}
+                  </div>
+                <//>
+              <//>
+            <//>
+          </section>
+        `;
+      }
+
+      const root = document.getElementById("root");
+      if (!root) {
+        throw new Error("No se encontró el contenedor root");
+      }
+
+      createRoot(root).render(html`<${App} />`);
+    </script>
+  </body>
+</html>

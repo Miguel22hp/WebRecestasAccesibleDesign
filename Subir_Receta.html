@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subir_Receta</title>
+    <link rel="stylesheet" href="./css/subir_receta.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "htm": "https://esm.sh/htm@3.1.1"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import htm from "htm";
+
+      const html = htm.bind(React.createElement);
+
+      function App() {
+        const [submitted, setSubmitted] = React.useState(false);
+
+        const handleSubmit = (event) => {
+          event.preventDefault();
+          setSubmitted(true);
+        };
+
+        return html`
+          <section className="page">
+            <h1>Subir_Receta</h1>
+            <p className="muted">Formulario sencillo para compartir tu receta.</p>
+            <form className="form" onSubmit=${handleSubmit}>
+              <label className="field">
+                <span>Nombre de la receta</span>
+                <input required name="nombre" placeholder="Ensalada templada" />
+              </label>
+              <label className="field">
+                <span>Tiempo estimado</span>
+                <input required name="tiempo" placeholder="30 min" />
+              </label>
+              <label className="field">
+                <span>Ingredientes (separados por coma)</span>
+                <textarea name="ingredientes" rows="3" placeholder="Quinoa, aguacate, limón"></textarea>
+              </label>
+              <label className="field">
+                <span>Pasos</span>
+                <textarea name="pasos" rows="4" placeholder="Describe los pasos"></textarea>
+              </label>
+              <div className="form__actions">
+                <button type="submit" className="button">Enviar</button>
+                <a className="button ghost" href="./Index.html">Cancelar</a>
+              </div>
+              ${submitted && html`<p className="success">Receta enviada. ¡Gracias!</p>`}
+            </form>
+          </section>
+        `;
+      }
+
+      const root = document.getElementById("root");
+      if (!root) {
+        throw new Error("No se encontró el contenedor root");
+      }
+
+      createRoot(root).render(html`<${App} />`);
+    </script>
+  </body>
+</html>

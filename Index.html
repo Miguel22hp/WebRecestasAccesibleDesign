@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <link rel="stylesheet" href="https://unpkg.com/@reach/combobox@0.18.0/styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@reach/menu-button@0.18.0/styles.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "htm": "https://esm.sh/htm@3.1.1"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import htm from "htm";
+      import {
+        Combobox,
+        ComboboxInput,
+        ComboboxPopover,
+        ComboboxList,
+        ComboboxOption
+      } from "https://esm.sh/@reach/combobox@0.18.0?external=react,react-dom";
+      import {
+        Menu,
+        MenuList,
+        MenuButton,
+        MenuItem
+      } from "https://esm.sh/@reach/menu-button@0.18.0?external=react,react-dom";
+
+      const html = htm.bind(React.createElement);
+
+      const recipes = [
+        { id: "ensalada", name: "Ensalada de quinoa" },
+        { id: "tacos", name: "Tacos rápidos" },
+        { id: "salmon", name: "Salmón al horno" },
+        { id: "vegana", name: "Bowl vegano" }
+      ];
+
+      function App() {
+        const [query, setQuery] = React.useState("");
+        const filtered = React.useMemo(() => {
+          const q = query.trim().toLowerCase();
+          return recipes.filter((r) => r.name.toLowerCase().includes(q));
+        }, [query]);
+
+        const handleSelect = (value) => {
+          const found = recipes.find((r) => r.name === value);
+          if (found) {
+            window.location.href = `./Receta.html?id=${found.id}`;
+          }
+        };
+
+        return html`
+          <section className="page">
+            <header className="hero">
+              <h1>Inicio</h1>
+              <p className="lead">Busca una receta con el combobox o usa el menubutton para navegar.</p>
+              <div className="actions">
+                <a className="button" href="./Favoritos.html">Favoritos</a>
+                <a className="button ghost" href="./Subir_Receta.html">Subir receta</a>
+              </div>
+            </header>
+
+            <div className="widgets">
+              <div>
+                <p className="eyebrow">Combobox</p>
+                <${Combobox} aria-label="Buscar receta" onSelect=${handleSelect}>
+                  <${ComboboxInput}
+                    className="input"
+                    placeholder="Escribe 'tacos', 'salmón'..."
+                    value=${query}
+                    onChange=${(event) => setQuery(event.target.value)}
+                  />
+                  <${ComboboxPopover} portal=${false} className="popover">
+                    <${ComboboxList}>
+                      ${filtered.length === 0 && html`<li className="empty">Sin resultados</li>`}
+                      ${filtered.map((r) => html`<${ComboboxOption} key=${r.id} value=${r.name} />`)}
+                    <//>
+                  <//>
+                <//>
+              </div>
+
+              <div>
+                <p className="eyebrow">Menubutton</p>
+                <${Menu}>
+                  <${MenuButton} className="menu-btn">Menú rápido ▾<//>
+                  <${MenuList}>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Favoritos.html")}>Favoritos<//>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Categorias.html")}>Categorías<//>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Subir_Receta.html")}>Subir receta<//>
+                  <//>
+                <//>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      const root = document.getElementById("root");
+      if (!root) {
+        throw new Error("No se encontró el contenedor root");
+      }
+
+      createRoot(root).render(html`<${App} />`);
+    </script>
+  </body>
+</html>

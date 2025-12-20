@@ -1,0 +1,26 @@
+:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #f59e0b;
+  --border: #1f2937;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: "Inter", system-ui, sans-serif; }
+.page { padding: 48px clamp(16px, 5vw, 80px); max-width: 1100px; margin: 0 auto; }
+
+.page__header { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
+.muted { color: var(--muted); margin: 0; }
+.h2 { margin-top: 8px; }
+
+.pill-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; margin: 16px 0; }
+.pill { padding: 8px 12px; background: var(--card); border: 1px solid var(--border); border-radius: 999px; }
+
+.step-list { margin: 16px 0 0; padding-left: 18px; line-height: 1.6; }
+.gallery { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 16px; }
+.gallery__item { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
+.gallery__item img { width: 100%; display: block; }
+
+.link { color: var(--accent); text-decoration: none; }

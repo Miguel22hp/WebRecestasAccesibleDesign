@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favoritos</title>
+    <link rel="stylesheet" href="./css/favoritos.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "htm": "https://esm.sh/htm@3.1.1"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import htm from "htm";
+
+      const html = htm.bind(React.createElement);
+
+      const favorites = [
+        { id: "ensalada", name: "Ensalada de quinoa", time: "20 min", tags: ["vegano", "rápido"] },
+        { id: "salmon", name: "Salmón al horno", time: "30 min", tags: ["pescado", "horno"] }
+      ];
+
+      function App() {
+        return html`
+          <section className="page">
+            <h1>Favoritos</h1>
+            <p className="muted">Tus recetas guardadas para acceder rápido.</p>
+            <div className="grid">
+              ${favorites.map((recipe) => html`
+                <article key=${recipe.id} className="card">
+                  <header className="card__header">
+                    <h3>${recipe.name}</h3>
+                    <p className="muted">${recipe.time}</p>
+                  </header>
+                  <div className="tags">
+                    ${recipe.tags.map((tag) => html`<span key=${tag} className="tag">${tag}</span>`)}
+                  </div>
+                  <a className="card__link" href=${`./Receta.html?id=${recipe.id}`}>Ver receta</a>
+                </article>
+              `)}
+            </div>
+            <a className="link" href="./Index.html">Volver a inicio</a>
+          </section>
+        `;
+      }
+
+      const root = document.getElementById("root");
+      if (!root) {
+        throw new Error("No se encontró el contenedor root");
+      }
+
+      createRoot(root).render(html`<${App} />`);
+    </script>
+  </body>
+</html>
