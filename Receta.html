@@ -27,21 +27,81 @@
 
       const html = htm.bind(React.createElement);
 
-      const recipe = {
-        name: "Tacos rápidos de pollo",
-        time: "15 min",
-        difficulty: "fácil",
-        ingredients: ["Tortillas", "Pollo desmenuzado", "Pico de gallo", "Cilantro"],
-        steps: [
-          "Calienta las tortillas.",
-          "Saltea el pollo con especias.",
-          "Monta los tacos con pico de gallo y cilantro.",
-          "Exprime lima al final."
-        ],
-        images: [
-          "https://images.unsplash.com/photo-1608032077018-1e1d9c0e849f?auto=format&fit=crop&w=900&q=80"
-        ]
+      const recipes = {
+        ensalada: {
+          name: "Ensalada de quinoa",
+          time: "20 min",
+          difficulty: "fácil",
+          ingredients: ["Quinoa", "Pepino", "Tomate cherry", "Aguacate", "Aceite de oliva", "Limón", "Sal"],
+          steps: [
+            "Cocina la quinoa según las instrucciones del paquete.",
+            "Corta el pepino, tomate y aguacate en dados pequeños.",
+            "Mezcla todos los ingredientes en un bowl.",
+            "Aliña con aceite de oliva, limón y sal al gusto."
+          ],
+          images: [
+            "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        tacos: {
+          name: "Tacos rápidos de pollo",
+          time: "15 min",
+          difficulty: "fácil",
+          ingredients: ["Tortillas", "Pollo desmenuzado", "Pico de gallo", "Cilantro", "Lima", "Cebolla"],
+          steps: [
+            "Calienta las tortillas en una sartén.",
+            "Saltea el pollo con especias al gusto.",
+            "Monta los tacos con pico de gallo y cilantro.",
+            "Exprime lima al final y sirve caliente."
+          ],
+          images: [
+            "https://images.unsplash.com/photo-1608032077018-1e1d9c0e849f?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        salmon: {
+          name: "Salmón al horno",
+          time: "25 min",
+          difficulty: "medio",
+          ingredients: ["Filete de salmón", "Aceite de oliva", "Limón", "Ajo", "Romero", "Sal", "Pimienta"],
+          steps: [
+            "Precalienta el horno a 200°C.",
+            "Marina el salmón con aceite, limón, ajo y especias.",
+            "Coloca en papel aluminio y hornea por 15-18 minutos.",
+            "Sirve con verduras al vapor o ensalada."
+          ],
+          images: [
+            "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        vegana: {
+          name: "Bowl vegano",
+          time: "30 min",
+          difficulty: "medio",
+          ingredients: ["Arroz integral", "Garbanzos", "Brócoli", "Zanahoria", "Hummus", "Semillas de sésamo", "Aguacate"],
+          steps: [
+            "Cocina el arroz integral según las instrucciones.",
+            "Saltea los garbanzos con especias.",
+            "Cocina al vapor el brócoli y la zanahoria.",
+            "Monta el bowl con todos los ingredientes y sirve con hummus."
+          ],
+          images: [
+            "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80"
+          ]
+        }
       };
+
+      // Función para obtener el parámetro ID de la URL
+      function getRecipeId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id') || 'tacos'; // Default a tacos si no hay ID
+      }
+
+      const currentRecipeId = getRecipeId();
+      const recipe = recipes[currentRecipeId] || recipes.tacos;
+      //console.log("ID de la receta:", currentRecipeId);
+      //console.log("Receta encontrada:", recipe);
+      //console.log("Receta encontrada2:", recipes[currentRecipeId]);
+      //console.log("Mostrando receta:", recipe.name);
 
       function App() {
         return html`
