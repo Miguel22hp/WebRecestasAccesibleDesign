@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio</title>
-    <link rel="stylesheet" href="https://unpkg.com/@reach/combobox@0.18.0/styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@reach/menu-button@0.18.0/styles.css" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@reach/combobox@0.18.0/styles.css" /> <!-- Combobox styles -->
+    <link rel="stylesheet" href="https://unpkg.com/@reach/menu-button@0.18.0/styles.css" /> <!-- MenuButton styles -->
+    <link rel="stylesheet" href="./css/index.css" /> <!-- Custom styles -->
     <script type="importmap">
       {
         "imports": {
@@ -17,10 +17,12 @@
         }
       }
     </script>
+    <!-- Alias para React UI-->
   </head>
   <body>
     <main id="root"></main>
     <script type="module">
+      // Importan componentes de React para usar Combobox y MenuButton
       import React from "react";
       import { createRoot } from "react-dom/client";
       import htm from "htm";
@@ -38,8 +40,10 @@
         MenuItem
       } from "https://esm.sh/@reach/menu-button@0.18.0?external=react,react-dom";
 
+
       const html = htm.bind(React.createElement);
 
+      // Array con recetas de ejemplo
       const recipes = [
         { id: "ensalada", name: "Ensalada de quinoa" },
         { id: "tacos", name: "Tacos rápidos" },
@@ -54,22 +58,23 @@
           return recipes.filter((r) => r.name.toLowerCase().includes(q));
         }, [query]);
 
+        // Filtered devuelve la lista de recetas
+        // Si se escribe en el combobox, filtra las recetas que coinciden con lo que hay escrito
+
         const handleSelect = (value) => {
           const found = recipes.find((r) => r.name === value);
           if (found) {
             window.location.href = `./Receta.html?id=${found.id}`;
           }
         };
+        // Si se selecciona una receta del combobox, navega a la página de esa receta
+        
 
         return html`
           <section className="page">
             <header className="hero">
               <h1>Inicio</h1>
               <p className="lead">Busca una receta con el combobox o usa el menubutton para navegar.</p>
-              <div className="actions">
-                <a className="button" href="./Favoritos.html">Favoritos</a>
-                <a className="button ghost" href="./Subir_Receta.html">Subir receta</a>
-              </div>
             </header>
 
             <div className="widgets">
@@ -83,7 +88,7 @@
                     onChange=${(event) => setQuery(event.target.value)}
                   />
                   <${ComboboxPopover} portal=${false} className="popover">
-                    <${ComboboxList}>
+                    <${ComboboxList}> 
                       ${filtered.length === 0 && html`<li className="empty">Sin resultados</li>`}
                       ${filtered.map((r) => html`<${ComboboxOption} key=${r.id} value=${r.name} />`)}
                     <//>
@@ -95,7 +100,7 @@
                 <p className="eyebrow">Menubutton</p>
                 <${Menu}>
                   <${MenuButton} className="menu-btn">Menú rápido ▾<//>
-                  <${MenuList}>
+                  <${MenuList} className="menu-list">
                     <${MenuItem} onSelect=${() => (window.location.href = "./Favoritos.html")}>Favoritos<//>
                     <${MenuItem} onSelect=${() => (window.location.href = "./Categorias.html")}>Categorías<//>
                     <${MenuItem} onSelect=${() => (window.location.href = "./Subir_Receta.html")}>Subir receta<//>
