@@ -70,7 +70,10 @@
 
         return html`
           <section className="page">
-            <h1>Categorias</h1>
+            <header className="headerFav">
+              <h1>Categorias</h1>
+              <a className="link" href="./Index.html">Volver a inicio</a>
+            </header>
             <p className="muted">Despliega el acordeón para ver ideas.</p>
 
             <${Accordion} collapsible>
@@ -103,7 +106,6 @@
               `)}
             <//>
 
-            <a className="link" href="./Index.html">Volver a inicio</a>
           </section>
         `;
       }

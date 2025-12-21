@@ -33,7 +33,10 @@
       function App() {
         return html`
           <section className="page">
-            <h1>Favoritos</h1>
+            <header className="headerFav">
+              <h1>Favoritos</h1>
+              <a className="link" href="./Index.html">Volver a inicio</a>
+            </header>
             <p className="muted">Tus recetas guardadas para acceder rápido.</p>
             <div className="grid">
               ${favorites.map((recipe) => html`
@@ -49,7 +52,6 @@
                 </article>
               `)}
             </div>
-            <a className="link" href="./Index.html">Volver a inicio</a>
           </section>
         `;
       }
