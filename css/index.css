@@ -59,3 +59,8 @@ body {
   background-color: var(--highlight);
   color: var(--highlight-text);
 }
+
+[data-reach-combobox-option]:hover {
+  background-color: var(--highlight);
+  color: var(--highlight-text) !important;
+}
