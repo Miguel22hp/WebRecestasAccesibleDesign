@@ -79,9 +79,9 @@
             <${Accordion} collapsible>
               ${categories.map((cat, index) => html`
                 <${AccordionItem} key=${cat.name} index=${index}>
-                  <h3>
+                  <h2>
                     <${AccordionButton} className="accordion__button">${cat.name}<//>
-                  </h3>
+                  </h2>
                   <${AccordionPanel} className="accordion__panel">
                     <ul className="list">
                       ${cat.recipes.map((item) => html`
@@ -89,6 +89,7 @@
                           <button 
                             className="recipe-link"
                             onClick=${() => handleRecipeClick(item)}
+                            aria-label=${`Ver receta de ${item}`}
                             onKeyDown=${(e) => {
                               if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault();
