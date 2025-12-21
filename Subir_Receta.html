@@ -35,7 +35,10 @@
 
         return html`
           <section className="page">
-            <h1>Subir_Receta</h1>
+            <header className="headerFav">
+              <h1>Subir Receta</h1>
+              <a className="link" href="./Index.html">Volver a inicio</a>
+            </header>
             <p className="muted">Formulario sencillo para compartir tu receta.</p>
             <form className="form" onSubmit=${handleSubmit}>
               <label className="field">
