@@ -27,10 +27,23 @@
 
       function App() {
         const [submitted, setSubmitted] = React.useState(false);
-
+        const [formData, setFormData] = React.useState({
+          nombre: "",
+          tiempo: "",
+          ingredientes: "",
+          pasos: ""
+        });
+        
         const handleSubmit = (event) => {
           event.preventDefault();
           setSubmitted(true);
+        };
+
+        const handleInputChange = (field, value) => {
+          setFormData(prev => ({
+            ...prev,
+            [field]: value
+          }));
         };
 
         return html`
@@ -43,19 +56,45 @@
             <form className="form" onSubmit=${handleSubmit}>
               <label className="field">
                 <span>Nombre de la receta</span>
-                <input required name="nombre" placeholder="Ensalada templada" />
+                <input 
+                  required 
+                  name="nombre" 
+                  placeholder="Ensalada templada"
+                  value=${formData.nombre}
+                  onChange=${(e) => handleInputChange('nombre', e.target.value)}
+                  autoComplete="off"
+                />
               </label>
               <label className="field">
                 <span>Tiempo estimado</span>
-                <input required name="tiempo" placeholder="30 min" />
+                <input 
+                  required 
+                  name="tiempo" 
+                  placeholder="30 min"
+                  value=${formData.tiempo}
+                  onChange=${(e) => handleInputChange('tiempo', e.target.value)}
+                  autoComplete="off"
+                />
               </label>
               <label className="field">
                 <span>Ingredientes (separados por coma)</span>
-                <textarea name="ingredientes" rows="3" placeholder="Quinoa, aguacate, limón"></textarea>
+                <textarea 
+                  name="ingredientes" 
+                  rows="3" 
+                  placeholder="Quinoa, aguacate, limón"
+                  value=${formData.ingredientes}
+                  onChange=${(e) => handleInputChange('ingredientes', e.target.value)}
+                ></textarea>
               </label>
               <label className="field">
                 <span>Pasos</span>
-                <textarea name="pasos" rows="4" placeholder="Describe los pasos"></textarea>
+                <textarea 
+                  name="pasos" 
+                  rows="4" 
+                  placeholder="Describe los pasos"
+                  value=${formData.pasos}
+                  onChange=${(e) => handleInputChange('pasos', e.target.value)}
+                ></textarea>
               </label>
               <div className="form__actions">
                 <button type="submit" className="button">Enviar</button>
