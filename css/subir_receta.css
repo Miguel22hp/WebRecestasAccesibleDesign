@@ -61,3 +61,8 @@ input:autofill {
 .success { color: #34d399; margin: 0; }
 .headerFav { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
 .link { color: var(--accent); text-decoration: none; padding: 14px 20px; display: inline-block; min-height: 44px; min-width: 44px; box-sizing: border-box; line-height: 1.2; }
+
+input::placeholder, textarea::placeholder {
+  color: var(--accent) !important;        /* Color específico para placeholders */
+  opacity: 0.6;                       /* Forzar opacidad para consistencia */
+}
