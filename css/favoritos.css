@@ -21,6 +21,6 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: "Inter
 .card__header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { background: rgba(168, 85, 247, 0.1); color: var(--accent); padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(168, 85, 247, 0.35); }
-.card__link { color: var(--accent); text-decoration: none; font-weight: 700; }
-.link { color: var(--accent); text-decoration: none; }
+.card__link { color: var(--accent); text-decoration: none; font-weight: 700; padding: 14px 20px; display: inline-block; min-height: 44px; min-width: 44px; box-sizing: border-box; line-height: 1.2; }
+.link { color: var(--accent); text-decoration: none; padding: 14px 20px; display: inline-block; min-height: 44px; min-width: 44px; box-sizing: border-box; line-height: 1.2; }
 .headerFav { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
