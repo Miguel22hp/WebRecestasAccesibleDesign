@@ -22,12 +22,15 @@ input, textarea {
   width: 100%; 
   border-radius: 10px; 
   border: 1px solid var(--border); 
-  padding: 10px; 
+  padding: 14px 12px; 
   background: #0f172a !important; 
   color: var(--text) !important;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   transition: all 0.2s ease;
+  min-height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
 }
 
 input:focus, textarea:focus {
@@ -53,8 +56,8 @@ input:autofill {
 }
 
 .form__actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.button { background: var(--accent); color: #022c3a; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 700; cursor: pointer; text-decoration: none; }
-.button.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+.button { background: var(--accent); color: #022c3a; border: none; border-radius: 10px; padding: 14px 20px; font-weight: 700; cursor: pointer; text-decoration: none; min-height: 44px; min-width: 44px; box-sizing: border-box; }
+.button.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 14px 20px; min-height: 44px; min-width: 44px; box-sizing: border-box; }
 .success { color: #34d399; margin: 0; }
 .headerFav { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
-.link { color: var(--accent); text-decoration: none; }
+.link { color: var(--accent); text-decoration: none; padding: 14px 20px; display: inline-block; min-height: 44px; min-width: 44px; box-sizing: border-box; line-height: 1.2; }
