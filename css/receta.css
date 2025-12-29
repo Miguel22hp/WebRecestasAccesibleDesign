@@ -27,4 +27,32 @@ body { margin: 0; background: var(--bg); color: var(--text); font-family: "Inter
 .gallery__item { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card); }
 .gallery__item img { width: 100%; display: block; }
 
-.link { color: var(--accent); text-decoration: none; }
+.link { color: var(--accent); text-decoration: none; padding: 14px 20px !important; display: inline-block; min-height: 44px !important; box-sizing: border-box; line-height: 1.2; }
+
+/* Estilos específicos para cumplir 2.5.8 Target Size (Minimum) en Tabs */
+
+/* Tab buttons */
+[data-reach-tab] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 14px 16px !important;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+/* TabList */
+[data-reach-tab-list] {
+  display: flex;
+  gap: 4px;
+}
+
+/* Asegurar que los botones nativos también cumplan */
+button {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 14px 16px !important;
+  box-sizing: border-box;
+}
