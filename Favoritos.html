@@ -48,7 +48,7 @@
                   <div className="tags">
                     ${recipe.tags.map((tag) => html`<span key=${tag} className="tag">${tag}</span>`)}
                   </div>
-                  <a className="card__link" href=${`./Receta.html?id=${recipe.id}`}>Ver receta</a>
+                  <a className="card__link" href=${`./Receta.html?id=${recipe.id}`}>Ver receta de ${recipe.name}</a>
                 </article>
               `)}
             </div>

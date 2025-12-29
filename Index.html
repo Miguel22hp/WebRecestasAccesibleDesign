@@ -83,13 +83,17 @@
                 <${Combobox} aria-label="Buscar receta" onSelect=${handleSelect}>
                   <${ComboboxInput}
                     className="input"
-                    placeholder="Escribe 'tacos', 'salmón'..."
+                    placeholder="Escribe 'tacos', 'salmón' y ve a la receta."
                     value=${query}
                     onChange=${(event) => setQuery(event.target.value)}
                   />
                   <${ComboboxPopover} portal=${false} className="popover">
                     <${ComboboxList}> 
-                      ${filtered.length === 0 && html`<li className="empty">Sin resultados</li>`}
+                      ${filtered.length === 0 && query.trim().length > 0 && html`
+                        <li className="empty" role="status" aria-live="polite">
+                          No se encontraron recetas para "${query}". Intenta con otra receta.
+                        </li>
+                      `}
                       ${filtered.map((r) => html`<${ComboboxOption} key=${r.id} value=${r.name} />`)}
                     <//>
                   <//>
