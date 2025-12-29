@@ -35,10 +35,10 @@ body {
 
 .widgets { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: var(--muted); margin: 0 0 8px; }
-.input { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border); background: #0b1222; color: var(--text); }
+.input { width: 100%; padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border); background: #0b1222; color: var(--text); min-height: 44px; font-size: 16px; }
 .popover { background: #0b1222; border-color: var(--border); }
 .empty { padding: 10px; color: var(--muted); }
-.menu-btn { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: #0b1222; color: var(--text); }
+.menu-btn { padding: 14px 16px; border-radius: 8px; border: 1px solid var(--border); background: #0b1222; color: var(--text); min-height: 44px; min-width: 44px; }
 .menu-list { background: #0b1222; border: 1px solid var(--border); border-radius: 8px; padding: 4px 0; }
 
 .button { background: var(--accent); color: #04101f; padding: 10px 16px; border-radius: 10px; border: none; text-decoration: none; font-weight: 700; }
@@ -63,4 +63,64 @@ body {
 [data-reach-combobox-option]:hover {
   background-color: var(--highlight);
   color: var(--highlight-text) !important;
+}
+
+/* Estilos específicos para cumplir 2.5.8 Target Size (Minimum) */
+
+/* ComboboxInput - Input de búsqueda */
+[data-reach-combobox-input] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 14px 16px !important;
+  font-size: 16px !important;
+  box-sizing: border-box;
+}
+
+/* ComboboxOption - Opciones del dropdown */
+[data-reach-combobox-option] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 12px 16px !important;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* MenuButton - Botón del menú */
+[data-reach-menu-button] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 14px 16px !important;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MenuItem - Items del menú desplegable */
+[data-reach-menu-item] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 12px 16px !important;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* ComboboxList - Lista del dropdown */
+[data-reach-combobox-list] {
+  padding: 4px 0;
+}
+
+/* MenuList - Lista del menú */
+[data-reach-menu-list] {
+  padding: 4px 0;
+}
+
+/* Span dentro de ComboboxOption */
+[data-reach-combobox-option-text] {
+  display: block;
+  width: 100%;
+  line-height: 1.4;
 }
