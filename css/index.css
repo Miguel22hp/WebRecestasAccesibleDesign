@@ -51,8 +51,8 @@ body {
 }
 
 [data-reach-combobox-option][data-highlighted] {
-  background-color: var(--highlight);
-  color: var(--highlight-text);
+  background-color: var(--highlight) !important;
+  color: var(--highlight-text) !important;
 }
 
 [data-reach-menu-item][data-selected] {
@@ -61,7 +61,7 @@ body {
 }
 
 [data-reach-combobox-option]:hover {
-  background-color: var(--highlight);
+  background-color: var(--highlight) !important;
   color: var(--highlight-text) !important;
 }
 
@@ -123,4 +123,18 @@ body {
   display: block;
   width: 100%;
   line-height: 1.4;
+}
+
+
+/* Estado cuando está tanto highlighted como hover */
+[data-reach-combobox-option][data-highlighted]:hover {
+  background-color: var(--highlight) !important;
+  color: var(--highlight-text) !important;
+}
+
+/* Prevenir estilos de navegador por defecto */
+[data-reach-combobox-option]:focus {
+  background-color: var(--highlight) !important;
+  color: var(--highlight-text) !important;
+  outline: none;
 }
