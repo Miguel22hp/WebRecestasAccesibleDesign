@@ -58,6 +58,18 @@
           return recipes.filter((r) => r.name.toLowerCase().includes(q));
         }, [query]);
 
+        // Función para renderizar el texto con highlight personalizado
+        const renderHighlightedText = (text, highlight) => {
+          if (!highlight.trim()) return text;
+          
+          const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+          return parts.map((part, i) => 
+            part.toLowerCase() === highlight.toLowerCase() 
+              ? html`<strong key=${i} style=${{ color: 'var(--highlight-text)' }}>${part}</strong>`
+              : part
+          );
+        };
+
         // Filtered devuelve la lista de recetas
         // Si se escribe en el combobox, filtra las recetas que coinciden con lo que hay escrito
 
@@ -94,7 +106,11 @@
                           No se encontraron recetas para "${query}". Intenta con otra receta.
                         </li>
                       `}
-                      ${filtered.map((r) => html`<${ComboboxOption} key=${r.id} value=${r.name} />`)}
+                      ${filtered.map((r) => html`
+                        <${ComboboxOption} key=${r.id} value=${r.name}>
+                          ${renderHighlightedText(r.name, query)}
+                        <//>
+                      `)}
                     <//>
                   <//>
                 <//>

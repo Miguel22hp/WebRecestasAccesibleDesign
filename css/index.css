@@ -125,6 +125,26 @@ body {
   line-height: 1.4;
 }
 
+/* Asegurar que el texto en las opciones no tenga espaciado extraño */
+[data-reach-combobox-option] {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Evitar espacios extraños en el contenido resaltado */
+[data-reach-combobox-option] span {
+  display: inline;
+  white-space: normal;
+}
+
+/* Estilos para el texto destacado personalizado */
+[data-reach-combobox-option] strong {
+  font-weight: 600;
+  color: var(--highlight-text);
+  background: transparent;
+}
+
 
 /* Estado cuando está tanto highlighted como hover */
 [data-reach-combobox-option][data-highlighted]:hover {
