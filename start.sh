@@ -1,42 +1,42 @@
 #!/bin/bash
 
-# Script para iniciar el servidor y abrir el navegador
-# Proyecto: Recetario Accesible con Reach UI
+# Script to start the server and open the browser
+# Project: Accessible Recipe Book with Reach UI
 
-echo "🚀 Iniciando servidor para Recetario Accesible..."
+echo "🚀 Starting Accessible Recipe Book server..."
 
-# Verificar que Python está instalado
+# Verify that Python is installed
 if ! command -v python3 &> /dev/null && ! command -v python &> /dev/null
 then
-    echo "❌ Error: Python no está instalado. Instala Python 3 para continuar."
+    echo "❌ Error: Python is not installed. Install Python 3 to continue."
     exit 1
 fi
 
-# Determinar comando Python
+# Determine Python command
 PYTHON_CMD="python3"
 if ! command -v python3 &> /dev/null; then
     PYTHON_CMD="python"
 fi
 
-# Puerto del servidor
+# Server port
 PORT=8000
 
-echo "✅ Python encontrado: $PYTHON_CMD"
-echo "📡 Iniciando servidor HTTP en puerto $PORT..."
+echo "✅ Python found: $PYTHON_CMD"
+echo "📡 Starting HTTP server on port $PORT..."
 
-# Verificar si el puerto está ocupado
+# Check if port is in use
 if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null 2>&1; then
-    echo "⚠️  El puerto $PORT está ocupado. Usando puerto alternativo 8001..."
+    echo "⚠️  Port $PORT is in use. Using alternative port 8001..."
     PORT=8001
 fi
 
-# Abrir navegador después de 2 segundos
-(sleep 2 && echo "🌐 Abriendo navegador..." && xdg-open "http://localhost:$PORT/Index.html" 2>/dev/null || open "http://localhost:$PORT/Index.html" 2>/dev/null || echo "Abre manualmente: http://localhost:$PORT/Index.html") &
+# Open browser after 2 seconds
+(sleep 2 && echo "🌐 Opening browser..." && xdg-open "http://localhost:$PORT/Index.html" 2>/dev/null || open "http://localhost:$PORT/Index.html" 2>/dev/null || echo "Open manually: http://localhost:$PORT/Index.html") &
 
-# Iniciar servidor
-echo "✨ Servidor corriendo en http://localhost:$PORT"
-echo "📄 Página principal: http://localhost:$PORT/Index.html"
-echo "⏹️  Presiona Ctrl+C para detener el servidor"
+# Start server
+echo "✨ Server running at http://localhost:$PORT"
+echo "📄 Home page: http://localhost:$PORT/Index.html"
+echo "⏹️  Press Ctrl+C to stop the server"
 echo ""
 
 $PYTHON_CMD -m http.server $PORT
