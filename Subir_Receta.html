@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página para subir una nueva receta</title>
+    <title>Page to Upload a New Recipe</title>
     <link rel="stylesheet" href="./css/subir_receta.css" />
     <script type="importmap">
       {
@@ -28,10 +28,10 @@
       function App() {
         const [submitted, setSubmitted] = React.useState(false);
         const [formData, setFormData] = React.useState({
-          nombre: "",
-          tiempo: "",
-          ingredientes: "",
-          pasos: ""
+          name: "",
+          time: "",
+          ingredients: "",
+          steps: ""
         });
         
         const handleSubmit = (event) => {
@@ -46,63 +46,79 @@
           }));
         };
 
+        const handleInvalid = (event) => {
+          event.target.setCustomValidity("Please fill out this field");
+        };
+
+        const handleInput = (event) => {
+          event.target.setCustomValidity("");
+        };
+
         return html`
           <section className="page">
             <header className="headerFav">
-              <h1>Subir Receta</h1>
-              <a className="link" href="./Index.html">Volver a inicio</a>
+              <h1>Upload Recipe</h1>
+              <a className="link" href="./Index.html">Back to home</a>
             </header>
-            <p className="muted">Formulario sencillo para compartir tu receta.</p>
+            <p className="muted">Simple form to share your recipe.</p>
             <form className="form" onSubmit=${handleSubmit}>
               <label className="field">
-                <span>Nombre de la receta</span>
+                <span>Recipe name</span>
                 <input 
                   required 
-                  name="nombre" 
-                  placeholder="Ensalada templada"
-                  value=${formData.nombre}
-                  onChange=${(e) => handleInputChange('nombre', e.target.value)}
+                  name="name" 
+                  placeholder="Warm salad"
+                  value=${formData.name}
+                  onChange=${(e) => handleInputChange('name', e.target.value)}
+                  onInvalid=${handleInvalid}
+                  onInput=${handleInput}
                   autoComplete="off"
                 />
               </label>
               <label className="field">
-                <span>Tiempo estimado</span>
+                <span>Estimated time</span>
                 <input 
                   required 
-                  name="tiempo" 
+                  name="time" 
                   placeholder="30 min"
-                  value=${formData.tiempo}
-                  onChange=${(e) => handleInputChange('tiempo', e.target.value)}
+                  value=${formData.time}
+                  onChange=${(e) => handleInputChange('time', e.target.value)}
+                  onInvalid=${handleInvalid}
+                  onInput=${handleInput}
                   autoComplete="off"
                 />
               </label>
               <label className="field">
-                <span>Ingredientes (separados por coma)</span>
+                <span>Ingredients (comma separated)</span>
                 <textarea 
                   required
-                  name="ingredientes" 
+                  name="ingredients" 
                   rows="3" 
-                  placeholder="Quinoa, aguacate, limón"
-                  value=${formData.ingredientes}
-                  onChange=${(e) => handleInputChange('ingredientes', e.target.value)}
+                  placeholder="Quinoa, avocado, lemon"
+                  value=${formData.ingredients}
+                  onChange=${(e) => handleInputChange('ingredients', e.target.value)}
+                  onInvalid=${handleInvalid}
+                  onInput=${handleInput}
                 ></textarea>
               </label>
               <label className="field">
-                <span>Pasos</span>
+                <span>Steps</span>
                 <textarea 
                   required
-                  name="pasos" 
+                  name="steps" 
                   rows="4" 
-                  placeholder="Describe los pasos"
-                  value=${formData.pasos}
-                  onChange=${(e) => handleInputChange('pasos', e.target.value)}
+                  placeholder="Describe the steps"
+                  value=${formData.steps}
+                  onChange=${(e) => handleInputChange('steps', e.target.value)}
+                  onInvalid=${handleInvalid}
+                  onInput=${handleInput}
                 ></textarea>
               </label>
               <div className="form__actions">
-                <button type="submit" className="button">Enviar</button>
-                <a className="button ghost" href="./Index.html">Cancelar</a>
+                <button type="submit" className="button">Submit</button>
+                <a className="button ghost" href="./Index.html">Cancel</a>
               </div>
-              ${submitted && html`<p className="success">Receta enviada. ¡Gracias!</p>`}
+              ${submitted && html`<p className="success">Recipe submitted. Thank you!</p>`}
             </form>
           </section>
         `;
@@ -110,7 +126,7 @@
 
       const root = document.getElementById("root");
       if (!root) {
-        throw new Error("No se encontró el contenedor root");
+        throw new Error("Root container not found");
       }
 
       createRoot(root).render(html`<${App} />`);

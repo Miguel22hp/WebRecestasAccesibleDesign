@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página de inicio de la web de recetas</title>
+    <title>Recipe Website Home Page</title>
     <link rel="stylesheet" href="https://unpkg.com/@reach/combobox@0.18.0/styles.css" /> <!-- Combobox styles -->
     <link rel="stylesheet" href="https://unpkg.com/@reach/menu-button@0.18.0/styles.css" /> <!-- MenuButton styles -->
     <link rel="stylesheet" href="./css/index.css" /> <!-- Custom styles -->
@@ -17,12 +17,12 @@
         }
       }
     </script>
-    <!-- Alias para React UI-->
+    <!-- Alias for React UI-->
   </head>
   <body>
     <main id="root"></main>
     <script type="module">
-      // Importan componentes de React para usar Combobox y MenuButton
+      // Import React components to use Combobox and MenuButton
       import React from "react";
       import { createRoot } from "react-dom/client";
       import htm from "htm";
@@ -43,12 +43,12 @@
 
       const html = htm.bind(React.createElement);
 
-      // Array con recetas de ejemplo
+      // Array with example recipes
       const recipes = [
-        { id: "ensalada", name: "Ensalada de quinoa" },
-        { id: "tacos", name: "Tacos rápidos" },
-        { id: "salmon", name: "Salmón al horno" },
-        { id: "vegana", name: "Bowl vegano" }
+        { id: "ensalada", name: "Quinoa salad" },
+        { id: "tacos", name: "Quick tacos" },
+        { id: "salmon", name: "Baked salmon" },
+        { id: "vegana", name: "Vegan bowl" }
       ];
 
       function App() {
@@ -58,7 +58,7 @@
           return recipes.filter((r) => r.name.toLowerCase().includes(q));
         }, [query]);
 
-        // Función para renderizar el texto con highlight personalizado
+        // Function to render text with custom highlight
         const renderHighlightedText = (text, highlight) => {
           if (!highlight.trim()) return text;
           
@@ -70,8 +70,8 @@
           );
         };
 
-        // Filtered devuelve la lista de recetas
-        // Si se escribe en el combobox, filtra las recetas que coinciden con lo que hay escrito
+        // Filtered returns the list of recipes
+        // If you type in the combobox, it filters recipes that match what's written
 
         const handleSelect = (value) => {
           const found = recipes.find((r) => r.name === value);
@@ -79,23 +79,23 @@
             window.location.href = `./Receta.html?id=${found.id}`;
           }
         };
-        // Si se selecciona una receta del combobox, navega a la página de esa receta
+        // If a recipe is selected from the combobox, navigate to that recipe's page
         
 
         return html`
           <section className="page">
             <header className="hero">
-              <h1>Inicio</h1>
-              <p className="lead">Busca una receta con el combobox o usa el menubutton para navegar.</p>
+              <h1>Home</h1>
+              <p className="lead">Search for a recipe with the combobox or use the menubutton to navigate.</p>
             </header>
 
             <div className="widgets">
               <div>
                 <p className="eyebrow">Combobox</p>
-                <${Combobox} aria-label="Buscar receta" onSelect=${handleSelect}>
+                <${Combobox} aria-label="Search recipe" onSelect=${handleSelect}>
                   <${ComboboxInput}
                     className="input"
-                    placeholder="Escribe 'tacos', 'salmón' y ve a la receta."
+                    placeholder="Type 'tacos', 'salmon' and go to the recipe."
                     value=${query}
                     onChange=${(event) => setQuery(event.target.value)}
                   />
@@ -103,7 +103,7 @@
                     <${ComboboxList}> 
                       ${filtered.length === 0 && query.trim().length > 0 && html`
                         <li className="empty" role="status" aria-live="polite">
-                          No se encontraron recetas para "${query}". Intenta con otra receta.
+                          No recipes found for "${query}". Try another recipe.
                         </li>
                       `}
                       ${filtered.map((r) => html`
@@ -119,11 +119,11 @@
               <div>
                 <p className="eyebrow">Menubutton</p>
                 <${Menu}>
-                  <${MenuButton} className="menu-btn">Menú rápido ▾<//>
+                  <${MenuButton} className="menu-btn">Quick menu ▾</>
                   <${MenuList} className="menu-list">
-                    <${MenuItem} onSelect=${() => (window.location.href = "./Favoritos.html")}>Favoritos<//>
-                    <${MenuItem} onSelect=${() => (window.location.href = "./Categorias.html")}>Categorías<//>
-                    <${MenuItem} onSelect=${() => (window.location.href = "./Subir_Receta.html")}>Subir receta<//>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Favoritos.html")}>Favorites</>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Categorias.html")}>Categories</>
+                    <${MenuItem} onSelect=${() => (window.location.href = "./Subir_Receta.html")}>Upload recipe</>
                   <//>
                 <//>
               </div>
@@ -134,7 +134,7 @@
 
       const root = document.getElementById("root");
       if (!root) {
-        throw new Error("No se encontró el contenedor root");
+        throw new Error("Root container not found");
       }
 
       createRoot(root).render(html`<${App} />`);

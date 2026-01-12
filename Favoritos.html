@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recetas almacenadas como favoritas</title>
+    <title>Recipes Saved as Favorites</title>
     <link rel="stylesheet" href="./css/favoritos.css" />
     <script type="importmap">
       {
@@ -26,18 +26,18 @@
       const html = htm.bind(React.createElement);
 
       const favorites = [
-        { id: "ensalada", name: "Ensalada de quinoa", time: "20 min", tags: ["vegano", "rápido"] },
-        { id: "salmon", name: "Salmón al horno", time: "30 min", tags: ["pescado", "horno"] }
+        { id: "ensalada", name: "Quinoa salad", time: "20 min", tags: ["vegan", "quick"] },
+        { id: "salmon", name: "Baked salmon", time: "30 min", tags: ["fish", "oven"] }
       ];
 
       function App() {
         return html`
           <section className="page">
             <header className="headerFav">
-              <h1>Favoritos</h1>
-              <a className="link" href="./Index.html">Volver a inicio</a>
+              <h1>Favorites</h1>
+              <a className="link" href="./Index.html">Back to home</a>
             </header>
-            <p className="muted">Tus recetas guardadas para acceder rápido.</p>
+            <p className="muted">Your saved recipes for quick access.</p>
             <div className="grid">
               ${favorites.map((recipe) => html`
                 <article key=${recipe.id} className="card">
@@ -48,7 +48,7 @@
                   <div className="tags">
                     ${recipe.tags.map((tag) => html`<span key=${tag} className="tag">${tag}</span>`)}
                   </div>
-                  <a className="card__link" href=${`./Receta.html?id=${recipe.id}`}>Ver receta de ${recipe.name}</a>
+                  <a className="card__link" href=${`./Receta.html?id=${recipe.id}`}>View ${recipe.name} recipe</a>
                 </article>
               `)}
             </div>
@@ -58,7 +58,7 @@
 
       const root = document.getElementById("root");
       if (!root) {
-        throw new Error("No se encontró el contenedor root");
+        throw new Error("Root container not found");
       }
 
       createRoot(root).render(html`<${App} />`);

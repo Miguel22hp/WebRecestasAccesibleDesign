@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Receta de un plato</title>
+    <title>Recipe of a Dish</title>
     <link rel="stylesheet" href="https://unpkg.com/@reach/tabs@0.18.0/styles.css" />
     <link rel="stylesheet" href="./css/receta.css" />
     <script type="importmap">
@@ -29,60 +29,60 @@
 
       const recipes = {
         ensalada: {
-          name: "Ensalada de quinoa",
+          name: "Quinoa salad",
           time: "20 min",
-          difficulty: "fácil",
-          ingredients: ["Quinoa", "Pepino", "Tomate cherry", "Aguacate", "Aceite de oliva", "Limón", "Sal"],
+          difficulty: "easy",
+          ingredients: ["Quinoa", "Cucumber", "Cherry tomato", "Avocado", "Olive oil", "Lemon", "Salt"],
           steps: [
-            "Cocina la quinoa según las instrucciones del paquete.",
-            "Corta el pepino, tomate y aguacate en dados pequeños.",
-            "Mezcla todos los ingredientes en un bowl.",
-            "Aliña con aceite de oliva, limón y sal al gusto."
+            "Cook the quinoa according to package instructions.",
+            "Cut the cucumber, tomato and avocado into small cubes.",
+            "Mix all ingredients in a bowl.",
+            "Dress with olive oil, lemon and salt to taste."
           ],
           images: [
             "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80"
           ]
         },
         tacos: {
-          name: "Tacos rápidos de pollo",
+          name: "Quick chicken tacos",
           time: "15 min",
-          difficulty: "fácil",
-          ingredients: ["Tortillas", "Pollo desmenuzado", "Pico de gallo", "Cilantro", "Lima", "Cebolla"],
+          difficulty: "easy",
+          ingredients: ["Tortillas", "Shredded chicken", "Pico de gallo", "Cilantro", "Lime", "Onion"],
           steps: [
-            "Calienta las tortillas en una sartén.",
-            "Saltea el pollo con especias al gusto.",
-            "Monta los tacos con pico de gallo y cilantro.",
-            "Exprime lima al final y sirve caliente."
+            "Heat the tortillas in a pan.",
+            "Sauté the chicken with spices to taste.",
+            "Assemble the tacos with pico de gallo and cilantro.",
+            "Squeeze lime at the end and serve hot."
           ],
           images: [
             "./images/tacos-rapidos.jpg"
           ]
         },
         salmon: {
-          name: "Salmón al horno",
+          name: "Baked salmon",
           time: "25 min",
-          difficulty: "medio",
-          ingredients: ["Filete de salmón", "Aceite de oliva", "Limón", "Ajo", "Romero", "Sal", "Pimienta"],
+          difficulty: "medium",
+          ingredients: ["Salmon fillet", "Olive oil", "Lemon", "Garlic", "Rosemary", "Salt", "Pepper"],
           steps: [
-            "Precalienta el horno a 200°C.",
-            "Marina el salmón con aceite, limón, ajo y especias.",
-            "Coloca en papel aluminio y hornea por 15-18 minutos.",
-            "Sirve con verduras al vapor o ensalada."
+            "Preheat the oven to 200°C.",
+            "Marinate the salmon with oil, lemon, garlic and spices.",
+            "Place on aluminum foil and bake for 15-18 minutes.",
+            "Serve with steamed vegetables or salad."
           ],
           images: [
             "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80"
           ]
         },
         vegana: {
-          name: "Bowl vegano",
+          name: "Vegan bowl",
           time: "30 min",
-          difficulty: "medio",
-          ingredients: ["Arroz integral", "Garbanzos", "Brócoli", "Zanahoria", "Hummus", "Semillas de sésamo", "Aguacate"],
+          difficulty: "medium",
+          ingredients: ["Brown rice", "Chickpeas", "Broccoli", "Carrot", "Hummus", "Sesame seeds", "Avocado"],
           steps: [
-            "Cocina el arroz integral según las instrucciones.",
-            "Saltea los garbanzos con especias.",
-            "Cocina al vapor el brócoli y la zanahoria.",
-            "Monta el bowl con todos los ingredientes y sirve con hummus."
+            "Cook the brown rice according to instructions.",
+            "Sauté the chickpeas with spices.",
+            "Steam the broccoli and carrot.",
+            "Assemble the bowl with all ingredients and serve with hummus."
           ],
           images: [
             "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80"
@@ -90,10 +90,10 @@
         }
       };
 
-      // Función para obtener el parámetro ID de la URL
+      // Function to get the ID parameter from the URL
       function getRecipeId() {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('id') || 'tacos'; // Default a tacos si no hay ID
+        return urlParams.get('id') || 'tacos'; // Default to tacos if no ID
       }
 
       const currentRecipeId = getRecipeId();
@@ -107,19 +107,19 @@
         return html`
           <section className="page">
             <header className="page__header">
-              <h1>Receta</h1>
-              <p className="muted">${recipe.time} · Dificultad ${recipe.difficulty}</p>
-              <a className="link" href="./Index.html">Volver a inicio</a>
+              <h1>Recipe</h1>
+              <p className="muted">${recipe.time} · Difficulty ${recipe.difficulty}</p>
+              <a className="link" href="./Index.html">Back to home</a>
             </header>
 
             <h2>${recipe.name}</h2>
 
             <${Tabs}>
-              <${TabList} aria-label="Secciones de la receta">
-                <${Tab}>Ingredientes<//>
-                <${Tab}>Pasos<//>
-                <${Tab}>Imágenes<//>
-              <//>
+              <${TabList} aria-label="Recipe sections">
+                <${Tab}>Ingredients</>
+                <${Tab}>Steps</>
+                <${Tab}>Images</>
+              </>
               <${TabPanels}>
                 <${TabPanel}>
                   <ul className="pill-list">
@@ -135,7 +135,7 @@
                   <div className="gallery">
                     ${recipe.images.map((src) => html`
                       <figure key=${src} className="gallery__item">
-                        <img src=${src} alt=${`Foto de ${recipe.name}`} loading="lazy" />
+                        <img src=${src} alt=${`Photo of ${recipe.name}`} loading="lazy" />
                       </figure>
                     `)}
                   </div>
@@ -148,7 +148,7 @@
 
       const root = document.getElementById("root");
       if (!root) {
-        throw new Error("No se encontró el contenedor root");
+        throw new Error("Root container not found");
       }
 
       createRoot(root).render(html`<${App} />`);
